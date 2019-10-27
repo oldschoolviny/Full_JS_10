@@ -10,10 +10,3 @@ budgetDay = 200;
 console.log(typeof money);
 console.log(typeof income);
 console.log(typeof deposit);
-console.log(income.length);
-console.log("Период " + period + ' месяцa'); 
-console.log("Цель заработать " + mission + ' долларов');
-console.log(addExpenses.toLowerCase(), addExpenses.split(', '));
-
-//Рузультат и остаток от деления
-console.log(money / 30, money % 2);
