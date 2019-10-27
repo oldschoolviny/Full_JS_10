@@ -1,5 +1,4 @@
-//
- 'use strict';
+'use strict';
 
  let money = 5755, 
  income = 'freelance',
