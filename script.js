@@ -11,7 +11,7 @@ let start = function(){
     money = prompt('Ваш месячный доход?', 50000);
 
     while(isNaN(money) || money === '' || money === null){
-        money = prompt('Ваш месячный доход?', 5000);
+        money = prompt('Ваш месячный доход?', 50000);
     }
 };
 
@@ -43,8 +43,10 @@ let getExpensesMonth = function(){
             expenses2 = prompt('Ввeдите обязательнную статью расходов?', "Бензин");
         }
 
+        sum += +prompt('Во сколько это обойдется?', 1800);
+
         while(isNaN(sum) || sum === '' || sum === null){
-            sum = +prompt('Во сколько это обойдется?', 2500);
+            sum = +prompt('Во сколько это обойдется?', 1800);
     }
 }
 
