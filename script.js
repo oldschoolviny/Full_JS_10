@@ -34,17 +34,22 @@ console.log(addExpenses.toLowerCase().split(', '));
 let getExpensesMonth = function(){
     let sum = 0;
     
-    for(let i = 0; i < 2; i++){
 
+    for(let i = 0; i < 2; i++){
+        
         if(i === 0){
             expenses1 = prompt('Ввeдите обязательнную статью расходов?', "Квартплата");
         }
         if(i === 1){
             expenses2 = prompt('Ввeдите обязательнную статью расходов?', "Бензин");
         }
-
+        
         sum += +prompt('Во сколько это обойдется?', 2500);
+        
+        while(isNaN(sum) || sum === '' || sum === null){
+        sum = +prompt('Во сколько это обойдется?', 2500);
     }
+}
 
     return sum;
 };
