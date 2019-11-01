@@ -1,39 +1,38 @@
 'use strict';
 
 let money, 
-income = 'Freelance',
-addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую'),
-deposit = confirm('Есть ли у вас депозит в банке?'),
-mission = 72000,
-period = 4;
-
-let start = function(){
-    money = prompt('Ваш месячный доход?', 50000);
-
-    while(isNaN(money) || money === '' || money === null){
-        money = prompt('Ваш месячный доход?', 5000);
-    }
-};
+    start = function(){
+        do{
+            money = prompt('Ваш месячный доход?', 50000);
+        }
+        
+        while(isNaN(money) || money === '' || money === null)
+    };
 
 start();
 
-
-let showTypOf = function(item){
-    console.log(item, typeof item);
+let appData = {
+    income: {},
+    addIncome: [],
+    expenses: {},
+    addExpenses: [],
+    deposit: false,
+    mission: 50000,
+    period: 3,
+    budget: money,
+    budgetDay: 0,
+    budgetMonth: 0,
+    expensesMonth: 0,
+    asking: function(){
+        let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
+        appData.addExpenses = addExpenses.toLowerCase().split(',');
+        appData.deposit = confirm('Есть ли у вас депозит в банке?');
+    }
 };
 
-showTypOf(money);
-showTypOf(income);
-showTypOf(deposit);
-
-let expenses1,
-    expenses2;
-
-console.log(addExpenses.toLowerCase().split(', '));
 
 let getExpensesMonth = function(){
     let sum = 0;
-    
 
     for(let i = 0; i < 2; i++){
         
@@ -63,17 +62,15 @@ let getAccumulatedMonth = function(){
 };
 
 let getTargetMonth = function(){
-    let sum = mission / expensesAmount;
+    let sum = appData.mission / expensesAmount;
     return sum;
 };
 
-let targetMonth = getTargetMonth();
-console.log(targetMonth);
 
-if(targetMonth <= 0){  
-    console.log('Цель не будет достигнута');  // срабатывает когда ввести отрицательное значение на вопрос.
+if(getTargetMonth() > 0){  
+    console.log('Цель будет достигнута за ' + Math.ceil(getTargetMonth()) + " месяца");
 }else{
-    console.log('Цель будет достигнута за ' + Math.ceil(targetMonth) + " месяца");
+    console.log('Цель не будет достигнута');  // срабатывает когда ввести отрицательное значение на вопрос.
 }
 
 let budgetDay = getAccumulatedMonth() / 30;
