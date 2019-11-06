@@ -26,7 +26,10 @@ let appData = {
     asking: function(){
 
         if(confirm('Если у вас дополнительный зароботок?')){
-            let itemIncome = prompt('Какой у вас дополнительный заработок?', "Таксую" );
+            let itemIncome = prompt('Какой у вас дополнительный заработок?', 'Фриланс' );
+            while (itemIncome == '' || itemIncome == null || !isNaN(itemIncome)) {
+                itemIncome = prompt('Каков ваш дополнительный заработок?', 'Фриланс');
+              }
             let cashIncome;
             do{
             cashIncome = prompt('Сколько в месяц вы на этом зарабатываете?', 1000);
@@ -36,8 +39,9 @@ let appData = {
             appData.income[itemIncome] = cashIncome;
         }
 
-        let addExpenses = prompt('Перечислите возможные расходы через запятую');
-        appData.addExpenses = addExpenses.toString().toUpperCase(0).split(',');
+        let addExpenses = prompt('Перечислите возможные расходы через запятую', "такси, газ, вода");
+        appData.addExpenses = addExpenses.toLowerCase().split(', ');
+        console.log(appData.addExpenses);
         appData.deposit = confirm('Есть ли у вас депозит в банке?');
         for (let i = 0; i < 2; i++){
 
@@ -148,3 +152,12 @@ console.log(appData.deposit);
 console.log(appData.moneyDeposit);
 console.log(appData.calcSaveMoney());
 console.log(appData.addExpenses);
+
+let outGoings = appData.addExpenses,
+    outGoingsUpper = [];
+for (let i = 0; i < outGoings.length; i++){
+    outGoingsUpper[i] = ' ' + outGoings[i].charAt(0).toUpperCase() + outGoings[i].slice(1);
+}
+
+
+console.log(String('Возможные расходы: ' + outGoingsUpper));
