@@ -53,5 +53,5 @@ image[0].setAttribute('style', 'background-image: url(./image/you-dont-know-js.j
 
 //Удаление рекламы
 let adv = document.querySelector('.adv');
-adv.classList.remove('adv');
-// console.log(adv);
+adv.remove();
+console.log(adv);
