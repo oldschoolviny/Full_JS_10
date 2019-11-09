@@ -58,9 +58,10 @@ let appData = {
         appData.showResult();
     },
     addExpensesBlock: function(){
+        
         console.log(expensesItems.parentNode);
         let cloneExpensesItem = expensesItems[0].cloneNode(true);
-        expensesItems[0].parentNode.appendChild(cloneExpensesItem, expensesPlus);
+        expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesPlus);
         expensesItems = document.querySelectorAll('.expenses-items');
         if(expensesItems.length === 3){
             expensesPlus.style.display = 'none';
