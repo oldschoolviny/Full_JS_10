@@ -53,6 +53,12 @@ let appData = {
         // appData.asking();
         // appData.getExpensesMonth();
         // appData.getBudget();
+        // appData.ShowResult();
+        },
+        showResult: function(){
+            budgetMonthValue = appData.budgetMonth;
+            budgetDayValue.value = appData.budgetDay;
+            expensesMonthValue.value = appData.expensesMonth;
         },
         addExpensesBlock: function(){
             
