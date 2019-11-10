@@ -138,7 +138,7 @@ let appData = {
             addExpenses.forEach(function(item){
                 item = item.trim();
                 if(item !== ''){
-                    this.addExpenses.push(item);
+                    appData.addExpenses.push(item);
                 }
 
             });
@@ -147,7 +147,7 @@ let appData = {
             additionalIncomeItem.forEach(function(item){
                 let itemValue = item.value.trim();
                 if(itemValue !== ''){
-                    this.addIncome.push(itemValue);
+                    appData.addIncome.push(itemValue);
                 }
             });
         },
@@ -189,7 +189,31 @@ let appData = {
     calcPeriod: function(){
         return this.budgetMonth * periodSelect.value;
     },
+    reset: function(){
+        document.querySelectorAll('input[type=text]').forEach(function(item) {
+            item.value = '';
+        });
+        rangePeriod.value = 1;
+        appData.chagePeriod();
+
+        let inputs = document.querySelectorAll('input[type=text]');
+            for (let i = 0; i < 11; i++) {
+                inputs[i].disabled = false;
+            }
+
+        start.style.display = 'block';
+        cancel.style.display = 'none';
+
+        incomeItems[1].remove();
+        incomeItems[2].remove();
+        incomePlus.style.display = 'block';
+
+        expensesItems[1].remove();
+        expensesItems[2].remove();
+        expensesPlus.style.display = 'block';
+
     
+    },
 };
 
 
@@ -198,4 +222,5 @@ start.addEventListener('click', appData.start.bind(appData));
 
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 incomePlus.addEventListener('click', appData.addIncomeBlock);
-rangePeriod.addEventListener('chage', appData.chagePeriod);
+rangePeriod.addEventListener('input', appData.chagePeriod);
+cancel.addEventListener('click', appData.reset);
