@@ -18,9 +18,9 @@ let start = document.getElementById('start'),
     salaryAmount = document.querySelector('.salary-amount'),
     incomeTitle = document.querySelector('.income-title'),
     expensesItems = document.querySelectorAll('.expenses-items'),
-    incomeItems = document.querySelectorAll('.income-items'),
+    incomeItems = document.querySelectorAll('input.income-items'),
     incomeAmount = document.querySelector('.income-amount'),
-    expensesTitle = document.querySelector('.expenses-title'),
+    expensesTitle = document.querySelector('input.expenses-title'),
     expensesAmount = document.querySelector('.expenses-amount'),
     additionalExpenses = document.querySelector('.additional-expenses'),
     periodSelect = document.querySelector('.period-select'),
@@ -83,7 +83,7 @@ let appData = {
             periodAmount.value = this.chagePeriod();
 
             periodSelect.addEventListener('change', function(){
-                incomePeriodValue.value = this.calcPeriod();
+                incomePeriodValue.value = appData.calcPeriod();
             });
 
         },
@@ -197,7 +197,7 @@ let appData = {
         appData.chagePeriod();
 
         let inputs = document.querySelectorAll('input[type=text]');
-            for (let i = 0; i < 11; i++) {
+            for (let i = 0; i < inputs.length; i++) {
                 inputs[i].disabled = false;
             }
 
