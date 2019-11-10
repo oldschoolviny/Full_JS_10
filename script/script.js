@@ -1,11 +1,11 @@
 'use strict';
 
 let start = document.getElementById('start'),
-    btnPlus = document.getElementsByTagName('button'),
     cancel = document.getElementById('cancel'),
+    btnPlus = document.getElementsByTagName('button'),
     incomePlus = btnPlus[0],
     expensesPlus = btnPlus[1],
-    additionalIncomeItem = document.querySelectorAll('.additional-income'),
+    additionalIncomeItem = document.querySelectorAll('.additional_income-item'),
     depositCheck = document.querySelector('#deposit-check'),
     budgetDayValue = document.getElementsByClassName('budget_day-value')[0],
     budgetMonthValue = document.getElementsByClassName('budget_month-value')[0],
@@ -45,31 +45,47 @@ let appData = {
     moneyDeposit: 0,
     start: function(){
                 
-        if(salaryAmount.value === ''){
-            alert('Ошибка, поле "Месячный доход" должно быть заполнено!');
+        if (salaryAmount.value === ''){
+            start.style.display = 'block';
             return;
-        } 
+        }
+    
+
         appData.budget = +salaryAmount.value;  
 
         appData.getExpenses();
         appData.getIncome();
         appData.getExpensesMonth();
         appData.getAddExpenses();
-        appData.getIncomeMonth();
         appData.getAddIncome();
+        appData.getIncomeMonth();
         appData.getBudget();
+        appData.chagePeriod();
 
         appData.showResult();
+        appData.blocked();
+        },
+        blocked: function(){
+            document.querySelectorAll('.data input[type=text]').forEach(function(item){
+                item.disabled = true;
+            });
+            start.style.display = 'none';
+            cancel.style.display = 'block';
         },
         showResult: function(){
-        budgetMonthValue.value = appData.budgetMonth;
-        budgetDayValue.value = Math.ceil(appData.budgetDay);
-        expensesMonthValue.value = appData.expensesMonth;
-        additionalExpensesValue.value = appData.addExpenses.join(', ');
-        additionalIncomeValue.value = appData.addIncome.join(', ');
-        targetMonthValue.value = Math.ceil(appData.getTargetMonth());
-        incomePeriodValue.value = appData.calcPeriod();
-        periodAmount.value = appData.changePeriod();
+            budgetMonthValue.value = appData.budgetMonth;
+            budgetDayValue.value = Math.ceil(appData.budgetDay);
+            expensesMonthValue.value = appData.expensesMonth;
+            additionalExpensesValue.value = appData.addExpenses.join(', ');
+            additionalIncomeValue.value = appData.addIncome.join(', ');
+            targetMonthValue.value = Math.ceil(appData.getTargetMonth());
+            incomePeriodValue.value = appData.calcPeriod();
+            periodAmount.value = appData.changePeriod();
+
+            periodSelect.addEventListener('change', function(){
+                incomePeriodValue.value = appData.calcPeriod();
+            });
+
         },
         addExpensesBlock: function(){
             
@@ -98,6 +114,15 @@ let appData = {
                 }
             });
 
+        },
+        chagePeriod: function(){
+            // Display the default slider value
+            periodAmount.innerHTML = rangePeriod.value;
+
+            // Update the current slider value (each time you drag the slider handle)
+            rangePeriod.oninput = function(){
+                periodAmount.innerHTML = this.value;
+            }
         },
         getIncome: function(){
             incomeItems.forEach(function(item){
@@ -164,13 +189,7 @@ let appData = {
     calcPeriod: function(){
         return appData.budgetMonth * periodSelect.value;
     },
-    changePeriod: function () {
-        periodAmount.innerHTML = rangePeriod.value;
-
-        rangePeriod.oninput = function () {
-            periodAmount.innerHTML = this.value;
-        };
-    },
+    
 };
 
 
@@ -179,15 +198,4 @@ start.addEventListener('click', appData.start);
 
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 incomePlus.addEventListener('click', appData.addIncomeBlock);
-rangePeriod.addEventListener('change', function () {
-    appData.changePeriod;
-    incomePeriodValue.value = appData.calcPeriod();
-});
-
-
-
-// let outGoings = appData.addExpenses,
-//     outGoingsUpper = [];
-// for (let i = 0; i < outGoings.length; i++){
-//     outGoingsUpper[i] = ' ' + outGoings[i].charAt(0).toUpperCase() + outGoings[i].slice(1);
-// }
+rangePeriod.addEventListener('chage', appData.chagePeriod);
