@@ -49,20 +49,21 @@ let appData = {
             start.style.display = 'block';
             return;
         }
-    
-        appData.budget = +salaryAmount.value;  
+            console.log(this);
 
-        appData.getExpenses();
-        appData.getIncome();
-        appData.getExpensesMonth();
-        appData.getAddExpenses();
-        appData.getAddIncome();
-        appData.getIncomeMonth();
-        appData.getBudget();
+        this.budget = +salaryAmount.value;  
 
-        appData.showResult();
-        appData.blocked();
-        
+        this.getExpenses();
+        this.getIncome();
+        this.getExpensesMonth();
+        this.getAddExpenses();
+        this.getAddIncome();
+        this.getIncomeMonth();
+        this.getBudget();
+        this.calcPeriod();
+
+        this.showResult();
+        this.blocked();
         },
         blocked: function(){
             document.querySelectorAll('.data input[type=text]').forEach(function(item){
@@ -82,7 +83,7 @@ let appData = {
             periodAmount.value = this.chagePeriod();
 
             periodSelect.addEventListener('change', function(){
-                incomePeriodValue.value = appData.calcPeriod();
+                incomePeriodValue.value = this.calcPeriod();
             });
 
         },
@@ -105,12 +106,11 @@ let appData = {
             }
         },
         getExpenses: function(){
-            let self = this;
             expensesItems.forEach(function(item){
                 let itemExpenses = item.querySelector('.expenses-title').value;
                 let cashExpenses = item.querySelector('.expenses-amount').value;
                 if(itemExpenses !== '' && cashExpenses !== ''){
-                    self.expenses[itemExpenses] = cashExpenses;
+                    appData.expenses[itemExpenses] = cashExpenses;
                 }
             });
 
@@ -125,32 +125,29 @@ let appData = {
             };
         },
         getIncome: function(){
-            let self = this;
             incomeItems.forEach(function(item){
                 let itemIncome = item.querySelector('.income-title').value;
                 let cashIncome = item.querySelector('.income-amount').value;
                 if(itemIncome !== '' && cashIncome !== ''){
-                    self.income[itemIncome] = cashIncome;
+                    appData.income[itemIncome] = cashIncome;
                 }
             });
         },
         getAddExpenses: function(){
-            let self = this;
             let addExpenses = additionalExpensesItem.value.split(',');
             addExpenses.forEach(function(item){
                 item = item.trim();
                 if(item !== ''){
-                    self.addExpenses.push(item);
+                    this.addExpenses.push(item);
                 }
 
             });
         },
         getAddIncome: function(){
-            let self = this;
             additionalIncomeItem.forEach(function(item){
                 let itemValue = item.value.trim();
                 if(itemValue !== ''){
-                    self.addIncome.push(itemValue);
+                    this.addIncome.push(itemValue);
                 }
             });
         },
@@ -163,7 +160,7 @@ let appData = {
     },
     getExpensesMonth: function(){
        for(let key in this.expenses){
-        this.expensesMonth += +this.expenses[key];
+           this.expensesMonth += +this.expenses[key];
        }
     },
     getIncomeMonth: function(){
@@ -192,38 +189,13 @@ let appData = {
     calcPeriod: function(){
         return this.budgetMonth * periodSelect.value;
     },
-    reset: function(){
-        document.querySelectorAll('input[type=text]').forEach(function(item) {
-            item.value = '';
-        });
-        rangePeriod.value = 1;
-        appData.chagePeriod();
-
-        let inputs = document.querySelectorAll('input[type=text]');
-            for (let i = 0; i < 11; i++) {
-                inputs[i].disabled = false;
-            }
-
-        start.style.display = 'block';
-        cancel.style.display = 'none';
-
-        incomeItems[1].remove();
-        incomeItems[2].remove();
-        incomePlus.style.display = 'block';
-
-        expensesItems[1].remove();
-        expensesItems[2].remove();
-        expensesPlus.style.display = 'block';
-
     
-    },
 };
 
 
 
-start.addEventListener('click', appData.start);
+start.addEventListener('click', appData.start.bind(appData));
 
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 incomePlus.addEventListener('click', appData.addIncomeBlock);
 rangePeriod.addEventListener('chage', appData.chagePeriod);
-cancel.addEventListener('click', appData.reset);
