@@ -49,7 +49,7 @@ let appData = {
             start.style.display = 'block';
             return;
         }
-    
+            console.log(this);
 
         appData.budget = +salaryAmount.value;  
 
@@ -60,7 +60,7 @@ let appData = {
         appData.getAddIncome();
         appData.getIncomeMonth();
         appData.getBudget();
-        appData.chagePeriod();
+        appData.calcPeriod()
 
         appData.showResult();
         appData.blocked();
@@ -80,7 +80,7 @@ let appData = {
             additionalIncomeValue.value = appData.addIncome.join(', ');
             targetMonthValue.value = Math.ceil(appData.getTargetMonth());
             incomePeriodValue.value = appData.calcPeriod();
-            periodAmount.value = appData.changePeriod();
+            periodAmount.value = appData.chagePeriod();
 
             periodSelect.addEventListener('change', function(){
                 incomePeriodValue.value = appData.calcPeriod();
