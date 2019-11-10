@@ -49,13 +49,13 @@ let appData = {
         }
         appData.budget = +salaryAmount.value;  
 
-        // appData.getExpenses();
+        appData.getExpenses();
 
         // appData.asking();
         // // appData.getExpensesMonth();
         // appData.getBudget();
 
-        appData.showResult();
+        // appData.showResult();
     },
     addExpensesBlock: function(){
         
@@ -82,6 +82,11 @@ let appData = {
         budgetDayValue.value = appData.budgetDay;
         expensesMonthValue.value = appData.expensesMonth;
             
+    },
+    getExpenses: function(){
+        expensesItems.forEach(function(item){
+                console.log(item);
+        });
     },
     asking: function(){
         if(confirm('Если у вас дополнительный зароботок?')){
@@ -144,27 +149,27 @@ let appData = {
         }
 
 
-        function incomePeriod(){
-            appData.accumalatiom = appData.budgetPeriod - appData.expensesPeriod;
-            if(appData.accumalatiom > 0){
-                console.log('Накоплено за период: ' + appData.accumalatiom);
-            } else if(appData.accumalatiom <= 0){
-                console.log('Ничего не накоплено, вы в минусе.');
-            }
-        }
+        // function incomePeriod(){
+        //     appData.accumalatiom = appData.budgetPeriod - appData.expensesPeriod;
+        //     if(appData.accumalatiom > 0){
+        //         console.log('Накоплено за период: ' + appData.accumalatiom);
+        //     } else if(appData.accumalatiom <= 0){
+        //         console.log('Ничего не накоплено, вы в минусе.');
+        //     }
+        // }
 
         
     },
-    getTargetMonth: function(){
+    // getTargetMonth: function(){
         
-        let targetMonth = Math.ceil(appData.mission / appData.budgetMonth);
+    //     let targetMonth = Math.ceil(appData.mission / appData.budgetMonth);
 
-        if(targetMonth > 0){  
-            console.log('Цель будет достигнута за ' + targetMonth + " месяца");
-        }else{
-            console.log('Цель не будет достигнута');  // уже работает
-        }
-    },
+    //     if(targetMonth > 0){  
+    //         console.log('Цель будет достигнута за ' + targetMonth + " месяца");
+    //     }else{
+    //         console.log('Цель не будет достигнута');  // уже работает
+    //     }
+    // },
     getStatusIncome: function(){
         if (appData.budgetDay >= 800){
             return('Высокий уровень дохода');
@@ -199,8 +204,8 @@ incomePlus.addEventListener('click', appData.addIncomeBlock);
 
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 
-let outGoings = appData.addExpenses,
-    outGoingsUpper = [];
-for (let i = 0; i < outGoings.length; i++){
-    outGoingsUpper[i] = ' ' + outGoings[i].charAt(0).toUpperCase() + outGoings[i].slice(1);
-}
+// let outGoings = appData.addExpenses,
+//     outGoingsUpper = [];
+// for (let i = 0; i < outGoings.length; i++){
+//     outGoingsUpper[i] = ' ' + outGoings[i].charAt(0).toUpperCase() + outGoings[i].slice(1);
+// }
