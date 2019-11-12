@@ -18,9 +18,9 @@ let start = document.getElementById('start'),
     salaryAmount = document.querySelector('.salary-amount'),
     incomeTitle = document.querySelector('.income-title'),
     expensesItems = document.querySelectorAll('.expenses-items'),
-    incomeItems = document.querySelectorAll('.income-items'),
+    incomeItems = document.querySelectorAll('input.income-items'),
     incomeAmount = document.querySelector('.income-amount'),
-    expensesTitle = document.querySelector('.expenses-title'),
+    expensesTitle = document.querySelector('input.expenses-title'),
     expensesAmount = document.querySelector('.expenses-amount'),
     additionalExpenses = document.querySelector('.additional-expenses'),
     periodSelect = document.querySelector('.period-select'),
@@ -49,20 +49,21 @@ let appData = {
             start.style.display = 'block';
             return;
         }
-    
-        appData.budget = +salaryAmount.value;  
+            console.log(this);
 
-        appData.getExpenses();
-        appData.getIncome();
-        appData.getExpensesMonth();
-        appData.getAddExpenses();
-        appData.getAddIncome();
-        appData.getIncomeMonth();
-        appData.getBudget();
+        this.budget = +salaryAmount.value;  
 
-        appData.showResult();
-        appData.blocked();
-        
+        this.getExpenses();
+        this.getIncome();
+        this.getExpensesMonth();
+        this.getAddExpenses();
+        this.getAddIncome();
+        this.getIncomeMonth();
+        this.getBudget();
+        this.calcPeriod();
+
+        this.showResult();
+        this.blocked();
         },
         blocked: function(){
             document.querySelectorAll('.data input[type=text]').forEach(function(item){
@@ -105,12 +106,11 @@ let appData = {
             }
         },
         getExpenses: function(){
-            let self = this;
             expensesItems.forEach(function(item){
                 let itemExpenses = item.querySelector('.expenses-title').value;
                 let cashExpenses = item.querySelector('.expenses-amount').value;
                 if(itemExpenses !== '' && cashExpenses !== ''){
-                    self.expenses[itemExpenses] = cashExpenses;
+                    appData.expenses[itemExpenses] = cashExpenses;
                 }
             });
 
@@ -125,32 +125,29 @@ let appData = {
             };
         },
         getIncome: function(){
-            let self = this;
             incomeItems.forEach(function(item){
                 let itemIncome = item.querySelector('.income-title').value;
                 let cashIncome = item.querySelector('.income-amount').value;
                 if(itemIncome !== '' && cashIncome !== ''){
-                    self.income[itemIncome] = cashIncome;
+                    appData.income[itemIncome] = cashIncome;
                 }
             });
         },
         getAddExpenses: function(){
-            let self = this;
             let addExpenses = additionalExpensesItem.value.split(',');
             addExpenses.forEach(function(item){
                 item = item.trim();
                 if(item !== ''){
-                    self.addExpenses.push(item);
+                    appData.addExpenses.push(item);
                 }
 
             });
         },
         getAddIncome: function(){
-            let self = this;
             additionalIncomeItem.forEach(function(item){
                 let itemValue = item.value.trim();
                 if(itemValue !== ''){
-                    self.addIncome.push(itemValue);
+                    appData.addIncome.push(itemValue);
                 }
             });
         },
@@ -163,7 +160,7 @@ let appData = {
     },
     getExpensesMonth: function(){
        for(let key in this.expenses){
-        this.expensesMonth += +this.expenses[key];
+           this.expensesMonth += +this.expenses[key];
        }
     },
     getIncomeMonth: function(){
@@ -200,7 +197,7 @@ let appData = {
         appData.chagePeriod();
 
         let inputs = document.querySelectorAll('input[type=text]');
-            for (let i = 0; i < 11; i++) {
+            for (let i = 0; i < inputs.length; i++) {
                 inputs[i].disabled = false;
             }
 
@@ -221,9 +218,9 @@ let appData = {
 
 
 
-start.addEventListener('click', appData.start);
+start.addEventListener('click', appData.start.bind(appData));
 
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 incomePlus.addEventListener('click', appData.addIncomeBlock);
-rangePeriod.addEventListener('chage', appData.chagePeriod);
+rangePeriod.addEventListener('input', appData.chagePeriod);
 cancel.addEventListener('click', appData.reset);
