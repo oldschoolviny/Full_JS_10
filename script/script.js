@@ -18,7 +18,7 @@ let start = document.getElementById('start'),
     salaryAmount = document.querySelector('.salary-amount'),
     incomeTitle = document.querySelector('.income-title'),
     expensesItems = document.querySelectorAll('.expenses-items'),
-    incomeItems = document.querySelectorAll('input.income-items'),
+    incomeItems = document.querySelectorAll('.income-items'),
     incomeAmount = document.querySelector('.income-amount'),
     expensesTitle = document.querySelector('input.expenses-title'),
     expensesAmount = document.querySelector('.expenses-amount'),
@@ -60,8 +60,8 @@ AppData.prototype.start = function(){
     allInput.forEach(function(item){
         item.setAttribute('disabled', 'true');
     });
-    incomePlus.setAttribute('disabled', 'true');
-    expensesPlus.setAttribute('disabled', 'true');
+    btnPlus[0].setAttribute('disabled', 'true');
+    btnPlus[1].setAttribute('disabled', 'true');
     start.style.display = 'none';
     cancel.style.display = 'block';
     this.budget = +salaryAmount.value;  
