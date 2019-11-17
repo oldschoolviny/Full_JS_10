@@ -33,20 +33,24 @@ let start = document.getElementById('start'),
     depositPercent = document.querySelector('.deposit-percent');
 
 
-const AppData = function(){
-    this.budgetDay = 0;
-    this.budget = 0;
-    this.budgetMonth = 0;
-    this.income = {};
-    this.incomeMonth = 0;
-    this.addIncome = [];
-    this.expenses = {};
-    this.expensesMonth = 0;
-    this.addExpenses = [];
-    this.deposit = false;
-    this.percentDeposit = 0;
-    this.moneyDeposit = 0;
-};
+class AppData {  //class + constructor
+    constructor(budget = 0, budgetDay = 0, budgetMonth = 0, income = {}, 
+        incomeMonth = 0, addIncome = [], expenses = {}, expensesMonth = 0, addExpenses = [],
+        deposit = false, percentDeposit = 0, moneyDeposit = 0){
+            this.budget = budget;
+            this.budgetDay = budgetDay;
+            this.budgetMonth = budgetMonth;
+            this.income = income;
+            this.incomeMonth = incomeMonth;
+            this.addIncome = addIncome;
+            this.expenses = expenses;
+            this.expensesMonth = expensesMonth;
+            this.addExpenses = addExpenses;
+            this.deposit = deposit;
+            this.percentDeposit = percentDeposit;
+            this.moneyDeposit = moneyDeposit;
+        }
+}
 
 AppData.prototype.check = function(){
     if (salaryAmount.value !== ''){
@@ -222,6 +226,19 @@ AppData.prototype.calcPeriod = function(){
 };  
 
 AppData.prototype.reset = function(){
+    this.budget = 0;
+    this.budgetDay = 0;
+    this.budgetMonth = 0;
+    this.income = {};
+    this.incomeMonth = 0;
+    this.addIncome = [];
+    this.expenses = {};
+    this.expensesMonth = 0;
+    this.addExpenses = [];
+    this.deposit = false;
+    this.percentDeposit = 0;
+    this.moneyDeposit = 0;
+
     document.querySelectorAll('input[type=text]').forEach(function(item) {
         item.value = '';
     });
