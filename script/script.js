@@ -245,6 +245,12 @@ AppData.prototype.reset = function(){
     rangePeriod.value = 1;
     appData.chagePeriod();
 
+    depositCheck.remove();
+    depositBank.style.display = 'none';
+    depositAmount.style.display = 'none';
+    depositAmount.value = '';
+    AppData.deposit = 'false';
+
     let inputs = document.querySelectorAll('input[type=text]');
         for (let i = 0; i < inputs.length; i++) {
             inputs[i].disabled = false;
@@ -260,6 +266,10 @@ AppData.prototype.reset = function(){
     expensesItems[1].remove();
     expensesItems[2].remove();
     expensesPlus.style.display = 'block';
+
+    depositBank.style.display = 'none';
+    depositAmount.style.display = 'none';
+    depositAmount.value = '';
 };
 
 depositCheck.addEventListener('change', function(){
