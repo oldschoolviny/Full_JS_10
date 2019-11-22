@@ -208,8 +208,8 @@ AppData.prototype.getExpensesMonth = function(){
 AppData.prototype.getIncomeMonth = function(){
     for(let key in this.income){
         this.incomeMonth += +this.income[key];
+    }; 
     }
-}; 
 
 AppData.prototype.getBudget = function(){
     this.budgetMonth = this.budget + this.incomeMonth - this.expensesMonth + (this.moneyDeposit * this.percentDeposit)/12;
@@ -283,30 +283,54 @@ AppData.prototype.reset = function(){
     depositAmount.value = '';
     AppData.deposit = 'false';
 
-    const inputs = document.querySelectorAll('input[type=text]');
-        for (let i = 0; i < inputs.length; i++) {
-            inputs[i].disabled = false;
-        }
 
-    start.style.display = 'block';
-    cancel.style.display = 'none';
+    let removeElem = '';
+    const quantityIncomes = document.querySelectorAll('.income-items').length - 2;
+    let rIt = quantityIncomes;
+    for(let i = 0; i <= quantityIncomes; i++){
+        rIt = document.querySelectorAll('.income-items').length;
+        removeElem = document.querySelectorAll('.income-items')[rIt - 1];
+        removeElem.remove();
+    }
 
-    incomeItems[1].remove();
-    incomeItems[2].remove();
+    const quantityExpenses = document.querySelectorAll('.expenses-items').length - 2;
+    let rEt = quantityExpenses;
+    for(let i =0; i <= quantityExpenses; i++){
+        rEt = document.querySelectorAll('.expenses-items').length;
+        removeElem = document.querySelectorAll('.expenses-items')[rEt - 1];
+        removeElem.remove();
+    }
+
     incomePlus.style.display = 'block';
-
-    expensesItems[1].remove();
-    expensesItems[2].remove();
     expensesPlus.style.display = 'block';
+    incomePlus.removeAttribute("disable");
+    expensesPlus.removeAttribute("disable");
+    // let inputs = document.querySelectorAll('input[type=text]');
+    // for (let i = 0; i < inputs.length; i++) {
+    //     inputs[i].disabled = false;
+    // }
 
-    depositBank.style.display = 'none';
-    depositAmount.style.display = 'none';
-    depositAmount.value = '';
+    // start.style.display = 'block';
+    // cancel.style.display = 'none';
+
+    // cloneItem[].remove();
+    // itemClass[].remove();
+    // button.style.display = 'block';
+    // appData.incomePlus.style.display = 'block';
+    
+    // incomeItems[].remove();
+    // incomeItems[].remove();
+    // incomePlus.style.display = 'block';
+
+    // expensesItems[1].remove();
+    // expensesItems[2].remove();
+    // expensesPlus.style.display = 'block';
     // const inputs = document.querySelectorAll('input[type=tex]');
     // for(let i = 0; i < inputs.length; i++){
     //     inputs[i].removeAttribute("disabled", false);
     //     inputs[i].value = '';
     // }
+
     // cancel.style.display = 'none';
     // start.style.display = 'block';
     // appData.addIncomeValue.value = '';
