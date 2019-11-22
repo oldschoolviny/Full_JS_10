@@ -283,6 +283,14 @@ AppData.prototype.reset = function(){
     depositAmount.value = '';
     AppData.deposit = 'false';
 
+    
+    let inputs = document.querySelectorAll('input[type=text]');
+    for (let i = 0; i < inputs.length; i++) {
+        inputs[i].disabled = false;
+    }
+
+    start.style.display = 'block';
+    cancel.style.display = 'none';
 
     let removeElem = '';
     const quantityIncomes = document.querySelectorAll('.income-items').length - 2;
@@ -302,22 +310,9 @@ AppData.prototype.reset = function(){
     }
 
     incomePlus.style.display = 'block';
-
-
-    // incomeItems[0].remove();
-    // incomePlus.style.display = 'block';
-
-    // expensesItems[0].remove();
     expensesPlus.style.display = 'block';
     incomePlus.removeAttribute("disable");
     expensesPlus.removeAttribute("disable");
-    // let inputs = document.querySelectorAll('input[type=text]');
-    // for (let i = 0; i < inputs.length; i++) {
-    //     inputs[i].disabled = false;
-    // }
-
-    // start.style.display = 'block';
-    // cancel.style.display = 'none';
 
     // cloneItem[].remove();
     // itemClass[].remove();
