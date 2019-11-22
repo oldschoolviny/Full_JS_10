@@ -269,13 +269,13 @@ AppData.prototype.reset = function(){
     appData.deposit = false;
     appData.percentDeposit = 0;
     appData.moneyDeposit = 0;
-    
 
     document.querySelectorAll('input[type=text]').forEach(item => {
         item.value = '';
     });
     rangePeriod.value = 1;
     appData.chagePeriod();
+
 
     depositCheck.remove();
     depositBank.style.display = 'none';
@@ -302,6 +302,12 @@ AppData.prototype.reset = function(){
     }
 
     incomePlus.style.display = 'block';
+
+
+    // incomeItems[0].remove();
+    // incomePlus.style.display = 'block';
+
+    // expensesItems[0].remove();
     expensesPlus.style.display = 'block';
     incomePlus.removeAttribute("disable");
     expensesPlus.removeAttribute("disable");
