@@ -33,7 +33,7 @@ window.addEventListener('DOMContentLoaded', function(){
     }
     setInterval(updateClock, 1000);
 }
-  countTimer('22 november 2019');
+  countTimer('22 december 2019');
 
   // Меню
     const toggleMenu = () => {
