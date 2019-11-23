@@ -34,4 +34,59 @@ window.addEventListener('DOMContentLoaded', function(){
     setInterval(updateClock, 1000);
 }
   countTimer('22 november 2019');
+
+  // Меню
+    const toggleMenu = () => {
+        const btnMenu = document.querySelector('.menu'),
+            menu = document.querySelector('menu'),
+            closeBtn = document.querySelector('.close-btn'),
+            menuItems = menu.querySelectorAll('ul>li');
+
+    const handlerMenu = () => {
+      menu.classList.toggle('active-menu');
+    };
+
+    btnMenu.addEventListener('click', handlerMenu);
+    closeBtn.addEventListener('click', handlerMenu);
+    menuItems.forEach((elem) => elem.addEventListener('click', handlerMenu));
+  };
+
+  toggleMenu();
+
+
+  // popup
+    const togglePopup = () => {
+    const popup = document.querySelector('.popup'),
+        popupContent = document.querySelector('.popup-content'),
+        popupBtn = document.querySelectorAll('.popup-btn'),
+        popupClose = document.querySelector('.popup-close');
+
+        popupBtn.forEach((elem) => {
+            elem.addEventListener('click', () => {
+                let fat = document.documentElement.clientWidth;
+                console.log('fat: ', fat);
+
+        if (fat >= 480) {
+            popup.style.display = 'block';
+            popupContent.animate([
+                { transform: 'translateX(0px)' }, 
+                { transform: 'translateX(-100px)' },
+                { transform: 'translateX(100px)' },
+                { transform: 'translateX(0px)' }
+            ], {
+                duration: 1000,
+                iterations: 2
+            });
+        } else {
+            popup.style.display = 'block';
+        }
+    });
+});
+
+    popupClose.addEventListener('click', () => {
+    popup.style.display = 'none';
+});
+};
+
+  togglePopup();
 });
