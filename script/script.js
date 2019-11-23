@@ -109,19 +109,18 @@ window.addEventListener('DOMContentLoaded', function(){
     };
 
     tabHeader.addEventListener('click', (event) => {
-      let target = event.target;
-      target = target.closest('.service-header-tab');
-
-      if (target.classList.contains('service-header-tab')) {
-        tab.forEach((item, i) => {
-          if (item === target) {
-            toggleTabContent(i);
-          }
-        });
-      }
-
+        let target = event.target;
+        target = target.closest('.service-header-tab');
+        
+        if (target.classList.contains('service-header-tab')) {
+            tab.forEach((item, i) => {
+                if (item === target) {
+                    toggleTabContent(i);
+                }
+            });
+        }
     });
-  };
+};
 
   tabs();
 });
