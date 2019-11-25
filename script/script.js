@@ -36,23 +36,30 @@ window.addEventListener('DOMContentLoaded', function(){
   countTimer('22 december 2019');
 
   // Меню
-    const toggleMenu = () => {
-        const btnMenu = document.querySelector('.menu'),
-            menu = document.querySelector('menu'),
-            closeBtn = document.querySelector('.close-btn'),
-            menuItems = menu.querySelectorAll('ul>li');
+  const toggleMenu = () => {
+    const menu = document.querySelector('menu'),
+          body = document.body;
 
     const handlerMenu = () => {
       menu.classList.toggle('active-menu');
     };
 
-    btnMenu.addEventListener('click', handlerMenu);
-    closeBtn.addEventListener('click', handlerMenu);
-    menuItems.forEach((elem) => elem.addEventListener('click', handlerMenu));
-  };
-  
-    toggleMenu();
+    body.addEventListener('click', (event) => {
+      let target = event.target;
+      if (target.classList.contains('close-btn') || target.tagName === 'A') {
+        handlerMenu();
+      }
 
+      target = target.closest('.menu');
+      if (target) {
+        handlerMenu();
+      } else if (!target) {
+        menu.classList.remove('active-menu');
+      }
+    });
+  };
+
+  toggleMenu();
 
   // popup
   const togglePopup = () => {
