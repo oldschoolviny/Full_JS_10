@@ -307,4 +307,124 @@ const calc = (price = 100) => {
 };
 
 calc(100);
+
+// send-ajax-form
+const sendForm = () => {
+  const errorMessage = 'Что-то пошло не так...',
+        loadMessage = 'Загрузка...',
+        successMessage = 'Спасибо! Мы скоро с вами свяжемся!';
+  const form = document.getElementById('form1'),
+        formQuest = document.getElementById('form2'),
+        formPopup = document.getElementById('form3');
+
+  const statusMessage = document.createElement('div');
+  statusMessage.style.cssText = 'font-size: 2rem';
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      form.appendChild(statusMessage);
+      statusMessage.textContent = loadMessage;
+      const formData = new FormData(form);
+      let body = {};
+      formData.forEach((val, key) => {
+        body[key] = val;
+      });
+      postData(body, () => {
+        form.reset();
+        statusMessage.textContent = successMessage;
+      }, (error) => {
+        statusMessage.textContent = errorMessage;
+      });
+    });
+
+    form.addEventListener('input', (event) => {
+      let target = event.target;
+      if (target.classList.contains('form-phone')) {
+        target.value = target.value.replace(/[^0-9\\+]/, '');
+      }
+      if (target.classList.contains('form-name')) {
+        target.value = target.value.replace(/[^А-яа-я\s]/, '');
+      }
+    });
+
+    formQuest.addEventListener('submit', (event) => {
+      event.preventDefault();
+      formQuest.appendChild(statusMessage);
+      statusMessage.textContent = loadMessage;
+      const formData = new FormData(formQuest);
+      let body = {};
+      formData.forEach((val, key) => {
+        body[key] = val;
+      });
+      postData(body, () => {
+        formQuest.reset();
+        statusMessage.textContent = successMessage;
+      }, (error) => {
+        statusMessage.textContent = errorMessage;
+      });
+    });
+
+    formQuest.addEventListener('input', (event) => {
+      let target = event.target;
+      if (target === document.getElementById('form2-name')) {
+        target.value = target.value.replace(/[^А-яа-я\s]/, '');
+      }
+      if (target.classList.contains('form-phone')) {
+        target.value = target.value.replace(/[^0-9\\+]/, '');
+      }
+      if (target === document.querySelector('#form2-email')) {
+        target.value = target.value.replace(/[^A-za-z0-9@.\s]/, '');
+      }
+      if (target.classList.contains('mess')) {
+        target.value = target.value.replace(/[^А-яа-я\s]/, '');
+      }
+    });
+
+    formPopup.addEventListener('submit', (event) => {
+      event.preventDefault();
+      formPopup.appendChild(statusMessage);
+      statusMessage.textContent = loadMessage;
+      const formData = new FormData(formPopup);
+      let body = {};
+      formData.forEach((val, key) => {
+        body[key] = val;
+      });
+      postData(body, () => {
+        formPopup.reset();
+        statusMessage.textContent = successMessage;
+      }, (error) => {
+        statusMessage.textContent = errorMessage;
+      });
+    });
+
+    formPopup.addEventListener('input', (event) => {
+      let target = event.target;
+      if (target.classList.contains('form-phone')) {
+        target.value = target.value.replace(/[^0-9\\+]/, '');
+      }
+      if (target.classList.contains('form-name')) {
+        target.value = target.value.replace(/[^А-яа-я\s]/, '');
+      }
+    });
+
+    const postData = (body, outputData, errorData) => {
+      const request = new XMLHttpRequest();
+      request.addEventListener('readystatechange', () => {
+        if (request.readyState != 4) {
+          return;
+        }
+        if (request.status === 200) {
+          outputData();
+        } else {
+          errorData(request.status);
+        }
+      });
+      request.open('POST', './server.php');
+      request.setRequestHeader('Content-Type', 'application/json');
+      request.send(JSON.stringify(body));
+    };
+  };
+
+sendForm();
+
 });
