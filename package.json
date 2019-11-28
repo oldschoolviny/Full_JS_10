@@ -1,0 +1,23 @@
+{
+  "name": "full_js_10",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oldschoolviny/Full_JS_10.git"
+  },
+  "author": "Valerii Bulakh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oldschoolviny/Full_JS_10/issues"
+  },
+  "homepage": "https://github.com/oldschoolviny/Full_JS_10#readme",
+  "devDependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  }
+}
