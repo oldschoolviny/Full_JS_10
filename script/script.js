@@ -37,29 +37,33 @@ window.addEventListener('DOMContentLoaded', function(){
 
   // Меню
   const toggleMenu = () => {
-    const menu = document.querySelector('menu'),
-          body = document.body;
-
+      const menu = document.querySelector('menu'),
+            body = document.body;
+    
     const handlerMenu = () => {
-      menu.classList.toggle('active-menu');
-    };
-
+        menu.classList.toggle('active-menu');
+};
+        
     body.addEventListener('click', (event) => {
-      let target = event.target;
-      if (target.classList.contains('close-btn') || target.tagName === 'A') {
-        handlerMenu();
-      }
-
-      target = target.closest('.menu');
-      if (target) {
-        handlerMenu();
-      } else if (!target) {
-        menu.classList.remove('active-menu');
-      }
+        let target = event.target;
+        if (target.classList.contains('close-btn') || target.tagName === 'A' ){
+            menu.classList.remove('active-menu');
+        }
+        
+        target = target.closest('menu');
+        if (!target) {
+            menu.classList.remove('active-menu');
+        }
+        
+        target = event.target;
+        target = target.closest('.menu');
+        if (target) {
+            handlerMenu();
+        }
     });
-  };
+};
 
-  toggleMenu();
+toggleMenu();
 
   // popup
   const togglePopup = () => {
@@ -72,7 +76,7 @@ window.addEventListener('DOMContentLoaded', function(){
             elem.addEventListener('click', () => {
                 let fat = document.documentElement.clientWidth;
                 console.log('fat: ', fat);
-
+                
         if (fat >= 480) {
             popup.style.display = 'block';
             popupContent.animate([
